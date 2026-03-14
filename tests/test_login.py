@@ -39,6 +39,6 @@ def test_users_should_be_able_to_login(page, username, password):
 def test_users_should_not_be_able_to_login_using_pom(
     login_page, products_page, username, password
 ):
-    login_page.goto()
+    login_page.visit()
     login_page.login(username, password)
     expect(products_page.title_heading).to_contain_text("Products")

@@ -5,7 +5,7 @@ class LoginPage:
         self.password_input = page.locator('[data-test="password"]')
         self.login_button = page.locator('[data-test="login-button"]')
 
-    def goto(self):
+    def visit(self):
         self.page.goto("https://www.saucedemo.com/")
 
     def login(self, username, password):
