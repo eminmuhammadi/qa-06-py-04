@@ -3,5 +3,5 @@ class ProductsPage:
         self.page = page
         self.title_heading = page.locator('[data-test="title"]')
 
-    def goto(self):
+    def visit(self):
         self.page.goto("https://www.saucedemo.com/inventory.html")
