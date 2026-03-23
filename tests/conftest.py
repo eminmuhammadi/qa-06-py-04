@@ -19,7 +19,7 @@ def context(browser):
     TIMESTAMP = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
 
     context = browser.new_context(
-        viewport={"width": 1280, "height": 720},
+        viewport={"width": 1920, "height": 1080},
         is_mobile=False,
         locale="en-US",
         java_script_enabled=True,
