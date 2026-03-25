@@ -15,21 +15,21 @@ from pages.products_page import ProductsPage
 # py -m pytest -v --browser webkit --headed -q --tracing=on --video=on --html=reports/report.html
 # Docs: https://playwright.dev/python/docs/test-runners
 @pytest.fixture(scope="function")
-def context(browser):
-    TIMESTAMP = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+def context(browser, request):
+    TC = f"{request.node.name}-{time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime())}"
 
     context = browser.new_context(
         viewport={"width": 1920, "height": 1080},
         is_mobile=False,
         locale="en-US",
         java_script_enabled=True,
-        record_video_dir=f"reports/artifact_{TIMESTAMP}",
-        record_har_path=f"reports/artifact_{TIMESTAMP}/network.har",
-        record_har_mode="full"
+        record_video_dir=f"reports/artifact_{TC}",
+        record_har_path=f"reports/artifact_{TC}/network.har",
+        record_har_mode="full",
     )
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
     yield context
-    context.tracing.stop(path=f"reports/artifact_{TIMESTAMP}/trace.zip")
+    context.tracing.stop(path=f"reports/artifact_{TC}/trace.zip")
     context.close()
 
 
@@ -44,6 +44,7 @@ def page(context):
 def login_page(page):
     login_page = LoginPage(page)
     yield login_page
+
 
 @pytest.fixture(scope="function")
 def products_page(page):
